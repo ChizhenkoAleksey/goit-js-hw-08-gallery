@@ -120,5 +120,45 @@ const galleryItems = [
       onCloseModal();
     }
   }
+  function onKeyPress(evt) {
+    if (evt.code === 'Escape') {
+      onCloseModal();
+    }
   
+    if (evt.code === 'ArrowRight') {
+      let position = 0;
+      for (let i = 0; i <= galleryItems.length - 1; i++) {
+        if (galleryItems[i].original === refs.originalImage.src) {
+          position = i;
+          if (position >= galleryItems.length - 1) {
+            position = 0;
+            refs.originalImage.src = galleryItems[position].original;
+            refs.originalImage.alt = galleryItems[position].description;
+            return;
+          }
+          refs.originalImage.src = galleryItems[position + 1].original;
+          refs.originalImage.alt = galleryItems[position + 1].description;
+          return;
+        }
+      }
+    }
+  
+    if (evt.code === 'ArrowLeft') {
+      let position = 0;
+      for (let i = 0; i <= galleryItems.length - 1; i++) {
+        if (galleryItems[i].original === refs.originalImage.src) {
+          position = i;
+          if (position < 1) {
+            position = galleryItems.length - 1;
+            refs.originalImage.src = galleryItems[position].original;
+            refs.originalImage.alt = galleryItems[position].description;
+            return;
+          } 
+          refs.originalImage.src = galleryItems[position - 1].original;
+          refs.originalImage.alt = galleryItems[position - 1].description;
+          return;
+        }
+      }
+    }
+  }
  
